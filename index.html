@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гармония чакр - Путеводитель по энергетическим центрам</title>
+    <style>
+        :root {
+            --muladhara-color: #FF5252;
+            --svadhisthana-color: #FF9100;
+            --manipura-color: #FFEB3B;
+            --anahata-color: #4CAF50;
+            --vishuddha-color: #2196F3;
+            --ajna-color: #324da6;
+            --sahasrara-color: #9d0d8a;
+            --primary-text: #333;
+            --secondary-text: #666;
+            --light-text: #fff;
+            --background: #f9f9f9;
+            --card-bg: #fff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --header-height: 70px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--primary-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+            color: var(--light-text);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        /* Стили для модальных окон чакр */
+        .chakra-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .chakra-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .chakra-card {
+            display: none;
+            width: 90%;
+            max-width: 100%;
+            max-height: 90vh;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .chakra-card.active {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .chakra-card-header {
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .chakra-card-header h3 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .chakra-card-body {
+            padding: 20px;
+            max-height: calc(90vh - 100px);
+            overflow-y: auto;
+        }
+
+        .chakra-card-body h4 {
+            font-size: 22px;
+            margin: 15px 0 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .chakra-card-body p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .chakra-card-body ul,
+        .chakra-card-body ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .chakra-card-body li {
+            margin-bottom: 8px;
+        }
+
+        .recommendations {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .recommendations h4 {
+            margin-top: 0;
+        }
+
+
+        /* Кнопка закрытия */
+        .chakra-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background: none;
+            border: none;
+            font-size: 30px;
+            line-height: 30px;
+            cursor: pointer;
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .chakra-card {
+                width: 95%;
+            }
+
+            .chakra-card-header h3 {
+                font-size: 24px;
+            }
+
+            .chakra-card-body {
+                padding: 15px;
+            }
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            border-radius: 20px;
+            padding: 5px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        main {
+            padding-top: calc(var(--header-height) + 20px);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 50px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .intro h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #5e35b1;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .human-figure-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            position: relative;
+            height: 600px;
+        }
+
+        .human-figure {
+            height: 100%;
+            position: relative;
+        }
+
+        .chakra-points {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .chakra-point {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7);
+            animation: pulse 2s infinite;
+            z-index: 10;
+        }
+
+        .chakra-point:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+            z-index: 20;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.7);
+            }
+
+            50% {
+                box-shadow: 0 0 15px 10px rgba(255, 255, 255, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.7);
+            }
+        }
+
+        .chakra-point.muladhara {
+            background-color: var(--muladhara-color);
+            bottom: 35%;
+            left: 50%;
+        }
+
+        .chakra-point.svadhisthana {
+            background-color: var(--svadhisthana-color);
+            bottom: 45%;
+            left: 50%;
+        }
+
+        .chakra-point.manipura {
+            background-color: var(--manipura-color);
+            bottom: 55%;
+            left: 50%;
+        }
+
+        .chakra-point.anahata {
+            background-color: var(--anahata-color);
+            bottom: 65%;
+            left: 50%;
+        }
+
+        .chakra-point.vishuddha {
+            background-color: var(--vishuddha-color);
+            bottom: 75%;
+            left: 50%;
+        }
+
+        .chakra-point.ajna {
+            background-color: var(--ajna-color);
+            bottom: 83%;
+            left: 50%;
+        }
+
+        .chakra-point.sahasrara {
+            background-color: var(--sahasrara-color);
+            bottom: 90%;
+            left: 50%;
+        }
+
+        .chakra-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chakra-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: none;
+        }
+
+        .chakra-card.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* .chakra-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        } */
+
+        .chakra-card-header {
+            padding: 1.5rem;
+            color: var(--light-text);
+        }
+
+        .muladhara .chakra-card-header {
+            background-color: var(--muladhara-color);
+        }
+
+        .svadhisthana .chakra-card-header {
+            background-color: var(--svadhisthana-color);
+        }
+
+        .manipura .chakra-card-header {
+            background-color: var(--manipura-color);
+            color: var(--primary-text);
+        }
+
+        .anahata .chakra-card-header {
+            background-color: var(--anahata-color);
+        }
+
+        .vishuddha .chakra-card-header {
+            background-color: var(--vishuddha-color);
+        }
+
+        .ajna .chakra-card-header {
+            background-color: var(--ajna-color);
+        }
+
+        .sahasrara .chakra-card-header {
+            background: linear-gradient(135deg, #9C27B0, #673AB7);
+        }
+
+        .chakra-card-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .chakra-card-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .chakra-card-body {
+            padding: 1.5rem;
+        }
+
+        .chakra-card-body h4 {
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem;
+            color: #5e35b1;
+        }
+
+        .chakra-card-body p {
+            margin-bottom: 1rem;
+        }
+
+        .chakra-card-body ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .chakra-card-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 2rem 0 0;
+            padding: 0.5rem;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            font-weight: 500;
+        }
+
+        .tab.active {
+            color: var(--light-text);
+            background-color: #5e35b1;
+        }
+
+        .tab:not(.active):hover {
+            background-color: rgba(94, 53, 177, 0.1);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .recommendations {
+            margin-top: 1.5rem;
+        }
+
+        .recommendations ol {
+            padding-left: 1.5rem;
+        }
+
+        .recommendations li {
+            margin-bottom: 0.75rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #5e35b1;
+            color: var(--light-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+            color: var(--light-text);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .chakra-info {
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+        }
+
+        .chakra-info h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: #5e35b1;
+        }
+
+        .practice-section {
+            margin-top: 3rem;
+        }
+
+        .practice-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .practice-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #5e35b1;
+        }
+
+        .meditation-timer {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .timer-display {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 1.5rem 0;
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .timer-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .start-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .pause-btn {
+            background-color: #FF9800;
+            color: white;
+        }
+
+        .reset-btn {
+            background-color: #F44336;
+            color: white;
+        }
+
+        .timer-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .timer-btn:active {
+            transform: translateY(0);
+        }
+
+        .duration-select {
+            margin: 1rem 0;
+        }
+
+        .duration-select select {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+
+        /* Dark mode */
+        body.dark-mode {
+            --primary-text: #e0e0e0;
+            --secondary-text: #b0b0b0;
+            --background: #121212;
+            --card-bg: #1e1e1e;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .chakra-spinner {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            margin: 2rem auto;
+        }
+
+        .chakra-spinner-circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            animation: spin 3s linear infinite;
+        }
+
+        .chakra-spinner-circle:nth-child(1) {
+            border-top-color: var(--muladhara-color);
+            animation-delay: -0.5s;
+        }
+
+        .chakra-spinner-circle:nth-child(2) {
+            border-right-color: var(--svadhisthana-color);
+            animation-delay: -1s;
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+        }
+
+        .chakra-spinner-circle:nth-child(3) {
+            border-bottom-color: var(--manipura-color);
+            animation-delay: -1.5s;
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+        }
+
+        .chakra-spinner-circle:nth-child(4) {
+            border-left-color: var(--anahata-color);
+            animation-delay: -2s;
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive design */
+        @media screen and (max-width: 768px) {
+            .chakra-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                justify-content: center;
+            }
+
+            .human-figure-container {
+                height: 400px;
+            }
+
+            .chakra-point {
+                width: 20px;
+                height: 20px;
+            }
+
+            header h1 {
+                font-size: 1.4rem;
+            }
+
+            .timer-display {
+                font-size: 2rem;
+            }
+
+            .timer-controls {
+                flex-direction: column;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .intro h2 {
+                font-size: 1.5rem;
+            }
+
+            .chakra-card-header h3 {
+                font-size: 1.3rem;
+            }
+
+            .tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .human-figure-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Гармония чакр</h1>
+        <button class="theme-toggle" id="themeToggle">Сменить тему</button>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h2>Энергетические центры человека</h2>
+            <p>Чакры — это энергетические центры в тонком теле человека, через которые циркулирует жизненная энергия
+                (прана). Согласно древневосточным учениям, существует семь основных чакр, расположенных вдоль
+                позвоночника от его основания до макушки головы. Каждая чакра отвечает за определённые аспекты нашего
+                физического и психологического благополучия.</p>
+            <div class="chakra-spinner">
+                <div class="chakra-spinner-circle"></div>
+                <div class="chakra-spinner-circle"></div>
+                <div class="chakra-spinner-circle"></div>
+                <div class="chakra-spinner-circle"></div>
+            </div>
+        </section>
+
+        <div class="human-figure-container">
+            <svg viewBox="0 0 300 600" xmlns="http://www.w3.org/2000/svg">
+                <!-- Head -->
+                <circle cx="150" cy="80" r="40" fill="black" />
+
+                <!-- Neck -->
+                <rect x="140" y="120" width="20" height="20" fill="black" />
+
+                <!-- Torso -->
+                <path d="M120,140 C100,180 100,280 120,340 L180,340 C200,280 200,180 180,140 Z" fill="black" />
+
+                <!-- Arms -->
+                <path d="M120,150 C80,180 60,240 70,300" stroke="black" stroke-width="20" fill="none" />
+                <path d="M180,150 C220,180 240,240 230,300" stroke="black" stroke-width="20" fill="none" />
+
+                <!-- Legs -->
+                <path d="M130,340 L110,540" stroke="black" stroke-width="25" fill="none" />
+                <path d="M170,340 L190,540" stroke="black" stroke-width="25" fill="none" />
+
+                <!-- Feet -->
+                <ellipse cx="105" cy="550" rx="15" ry="10" fill="black" />
+                <ellipse cx="195" cy="550" rx="15" ry="10" fill="black" />
+            </svg>
+            <div class="chakra-points">
+                <div class="chakra-point muladhara" data-chakra="muladhara" title="Муладхара - Корневая чакра"></div>
+                <div class="chakra-point svadhisthana" data-chakra="svadhisthana"
+                    title="Свадхистана - Сакральная чакра"></div>
+                <div class="chakra-point manipura" data-chakra="manipura" title="Манипура - Чакра солнечного сплетения">
+                </div>
+                <div class="chakra-point anahata" data-chakra="anahata" title="Анахата - Сердечная чакра"></div>
+                <div class="chakra-point vishuddha" data-chakra="vishuddha" title="Вишуддха - Горловая чакра"></div>
+                <div class="chakra-point ajna" data-chakra="ajna" title="Аджна - Чакра третьего глаза"></div>
+                <div class="chakra-point sahasrara" data-chakra="sahasrara" title="Сахасрара - Коронная чакра"></div>
+            </div>
+        </div>
+
+        <div class="chakra-info" id="chakraInfo">
+            <h3>Выберите чакру на изображении для получения информации</h3>
+            <p>Нажмите на любую из цветных точек на силуэте человека, чтобы узнать больше о каждой чакре, её свойствах,
+                функциях и методах работы с ней.</p>
+        </div>
+
+        <div class="chakra-cards" id="chakraCards">
+            <!-- Муладхара -->
+            <div class="chakra-card muladhara" id="muladhara-card">
+                <div class="chakra-card-header">
+                    <h3>Муладхара (Корневая чакра)</h3>
+                    <p>Расположение: У основания позвоночника</p>
+                </div>
+                <div class="chakra-card-body">
+                    <h4>Описание</h4>
+                    <p>Муладхара — первая чакра, расположенная у основания позвоночника. Она отвечает за вашу связь с
+                        землей, чувство безопасности и стабильности. Эта чакра связана с выживанием, материальным
+                        благополучием и базовыми потребностями человека.</p>
+
+                    <h4>Основные свойства</h4>
+                    <ul>
+                        <li>Цвет: Красный</li>
+                        <li>Элемент: Земля</li>
+                        <li>Символ: Четырехлепестковый лотос</li>
+                        <li>Мантра: "ЛАМ"</li>
+                        <li>Нота: До</li>
+                    </ul>
+
+                    <h4>Физические проявления</h4>
+                    <p>Связана с прямой кишкой, толстым кишечником, нижними конечностями, простатой у мужчин и
+                        влагалищем у женщин.</p>
+
+                    <h4>Признаки блокировки</h4>
+                    <ul>
+                        <li>Чувство небезопасности и страха</li>
+                        <li>Финансовые проблемы</li>
+                        <li>Проблемы с весом</li>
+                        <li>Болезни ног, колен</li>
+                        <li>Запоры, геморрой</li>
+                    </ul>
+
+                    <h4>Признаки гармоничной работы</h4>
+                    <ul>
+                        <li>Чувство безопасности и защищенности</li>
+                        <li>Финансовая стабильность</li>
+                        <li>Здоровое отношение к материальным ценностям</li>
+                        <li>Энергичность и жизнестойкость</li>
+                        <li>Ощущение "укорененности" в жизни</li>
+                    </ul>
+
+                    <div class="recommendations">
+                        <h4>10 рекомендаций для работы с Муладхарой</h4>
+                        <ol>
+                            <li><strong>Хождение босиком</strong> по земле, траве или песку для укрепления связи с
+                                землей.</li>
+                            <li><strong>Физические упражнения</strong>, особенно приседания, прыжки и позы йоги, такие
+                                как "Гора" (Тадасана) и "Дерево" (Врикшасана).</li>
+                            <li><strong>Медитация на цвет</strong> - визуализация красного света в области основания
+                                позвоночника.</li>
+                            <li><strong>Пение мантры "ЛАМ"</strong> в течение 5-10 минут.</li>
+                            <li><strong>Ароматерапия</strong> с использованием эфирных масел кедра, пачули, сандала или
+                                гвоздики.</li>
+                            <li><strong>Потребление продуктов красного цвета</strong> - свекла, красный перец, клубника,
+                                вишня.</li>
+                            <li><strong>Ношение красных предметов одежды</strong> или украшений.</li>
+                            <li><strong>Работа с кристаллами</strong> - красный яшма, гематит, черный турмалин.</li>
+                            <li><strong>Практика заземления</strong> - представляйте корни, растущие от ваших ног
+                                глубоко в землю.</li>
+                            <li><strong>Установление финансового порядка</strong> - создание бюджета, планирование
+                                расходов.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Свадхистана -->
+            <div class="chakra-card svadhisthana" id="svadhisthana-card">
+                <div class="chakra-card-header">
+                    <h3>Свадхистана (Сакральная чакра)</h3>
+                    <p>Расположение: Чуть ниже пупка</p>
+                </div>
+                <div class="chakra-card-body">
+                    <h4>Описание</h4>
+                    <p>Свадхистана — вторая чакра, расположенная в области нижней части живота. Она отвечает за
+                        творчество, сексуальность, чувственные удовольствия и эмоции. Эта чакра связана со способностью
+                        "плыть по течению" и наслаждаться жизнью.</p>
+
+                    <h4>Основные свойства</h4>
+                    <ul>
+                        <li>Цвет: Оранжевый</li>
+                        <li>Элемент: Вода</li>
+                        <li>Символ: Шестилепестковый лотос</li>
+                        <li>Мантра: "ВАМ"</li>
+                        <li>Нота: Ре</li>
+                    </ul>
+
+                    <h4>Физические проявления</h4>
+                    <p>Связана с репродуктивными органами, мочевым пузырем, поясницей и тазовой областью.</p>
+
+                    <h4>Признаки блокировки</h4>
+                    <ul>
+                        <li>Отсутствие творческих проявлений</li>
+                        <li>Сексуальные проблемы, дисфункции</li>
+                        <li>Эмоциональная нестабильность</li>
+                        <li>Заболевания репродуктивной системы</li>
+                        <li>Проблемы с почками и мочевым пузырем</li>
+                    </ul>
+
+                    <h4>Признаки гармоничной работы</h4>
+                    <ul>
+                        <li>Творческий потенциал</li>
+                        <li>Здоровая сексуальность</li>
+                        <li>Умение получать удовольствие от жизни</li>
+                        <li>Эмоциональная гибкость</li>
+                        <li>Гармоничные отношения с окружающими</li>
+                    </ul>
+
+                    <div class="recommendations">
+                        <h4>10 рекомендаций для работы со Свадхистаной</h4>
+                        <ol>
+                            <li><strong>Танцевальная практика</strong> - особенно танец живота, который активирует
+                                движение энергии в области таза.</li>
+                            <li><strong>Йога</strong> с упором на позы, открывающие бедра (Баддха Конасана, Упавиштха
+                                Конасана).</li>
+                            <li><strong>Медитация на воду</strong> - наблюдение за текущей водой или визуализация
+                                оранжевого света в нижней части живота.</li>
+                            <li><strong>Пение мантры "ВАМ"</strong> в течение 5-10 минут.</li>
+                            <li><strong>Творческие занятия</strong> - рисование, музыка, танцы, ремесла без критической
+                                оценки результата.</li>
+                            <li><strong>Работа с эмоциями</strong> - ведение дневника эмоций, честное выражение чувств.
+                            </li>
+                            <li><strong>Употребление продуктов оранжевого цвета</strong> - морковь, апельсины, манго,
+                                тыква.</li>
+                            <li><strong>Работа с кристаллами</strong> - сердолик, лунный камень, янтарь.</li>
+                            <li><strong>Ароматерапия</strong> с использованием масел сандала, иланг-иланга, нероли или
+                                апельсина.</li>
+                            <li><strong>Принятие теплых ванн</strong> с эфирными маслами для расслабления тазовой
+                                области.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Манипура -->
+            <div class="chakra-card manipura" id="manipura-card">
+                <div class="chakra-card-header">
+                    <h3>Манипура (Чакра солнечного сплетения)</h3>
+                    <p>Расположение: Область солнечного сплетения</p>
+                </div>
+                <div class="chakra-card-body">
+                    <h4>Описание</h4>
+                    <p>Манипура — третья чакра, расположенная в области солнечного сплетения. Она отвечает за личную
+                        силу, уверенность в себе, самооценку и волю. Эта чакра связана с трансформацией и
+                        преобразованием энергии, подобно огню.</p>
+
+                    <h4>Основные свойства</h4>
+                    <ul>
+                        <li>Цвет: Желтый</li>
+                        <li>Элемент: Огонь</li>
+                        <li>Символ: Десятилепестковый лотос</li>
+                        <li>Мантра: "РАМ"</li>
+                        <li>Нота: Ми</li>
+                    </ul>
+
+                    <h4>Физические проявления</h4>
+                    <p>Связана с пищеварительной системой, печенью, желчным пузырем, поджелудочной железой и селезенкой.
+                    </p>
+
+                    <h4>Признаки блокировки</h4>
+                    <ul>
+                        <li>Низкая самооценка, неуверенность в себе</li>
+                        <li>Проблемы с пищеварением</li>
+                        <li>Гнев, агрессия или чрезмерный контроль</li>
+                        <li>Чувство беспомощности</li>
+                        <li>Заболевания желудка, печени, поджелудочной железы</li>
+                    </ul>
+
+                    <h4>Признаки гармоничной работы</h4>
+                    <ul>
+                        <li>Здоровая уверенность в себе</li>
+                        <li>Решительность и целеустремленность</li>
+                        <li>Хорошее пищеварение</li>
+                        <li>Способность преодолевать трудности</li>
+                        <li>Внутренняя сила и мотивация</li>
+                    </ul>
+
+                    <div class="recommendations">
+                        <h4>10 рекомендаций для работы с Манипурой</h4>
+                        <ol>
+                            <li><strong>Практика силовых упражнений</strong>, особенно для мышц кора и пресса.</li>
+                            <li><strong>Поза Воина (Вирабхадрасана)</strong> и другие асаны йоги, укрепляющие центр
+                                тела.</li>
+                            <li><strong>Дыхательная практика "Агни Сара"</strong> (огненное дыхание) и пранаяма
+                                Капалабхати.</li>
+                            <li><strong>Пение мантры "РАМ"</strong> в течение 5-10 минут.</li>
+                            <li><strong>Медитация на желтый цвет</strong> - визуализация яркого солнца в области
+                                солнечного сплетения.</li>
+                            <li><strong>Постановка и достижение личных целей</strong>, начиная с малых и постепенно
+                                усложняя их.</li>
+                            <li><strong>Употребление продуктов желтого цвета</strong> - кукуруза, бананы, ананасы,
+                                лимоны.</li>
+                            <li><strong>Работа с кристаллами</strong> - цитрин, тигровый глаз, янтарь.</li>
+                            <li><strong>Ароматерапия</strong> с использованием масел лимона, розмарина, имбиря.</li>
+                            <li><strong>Практика самоутверждений</strong> - ежедневное повторение позитивных аффирмаций
+                                о своей силе и ценности.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Анахата -->
+            <div class="chakra-card anahata" id="anahata-card">
+                <div class="chakra-card-header">
+                    <h3>Анахата (Сердечная чакра)</h3>
+                    <p>Расположение: Центр груди</p>
+                </div>
+                <div class="chakra-card-body">
+                    <h4>Описание</h4>
+                    <p>Анахата — четвертая чакра, расположенная в центре груди. Она отвечает за любовь, сострадание,
+                        прощение и отношения с другими людьми. Эта чакра является связующим звеном между нижними чакрами
+                        (физическими) и верхними (духовными).</p>
+
+                    <h4>Основные свойства</h4>
+                    <ul>
+                        <li>Цвет: Зеленый или розовый</li>
+                        <li>Элемент: Воздух</li>
+                        <li>Символ: Двенадцатилепестковый лотос</li>
+                        <li>Мантра: "ЯМ"</li>
+                        <li>Нота: Фа</li>
+                    </ul>
+
+                    <h4>Физические проявления</h4>
+                    <p>Связана с сердцем, легкими, кровеносной системой, верхней частью спины и руками.</p>
+
+                    <h4>Признаки блокировки</h4>
+                    <ul>
+                        <li>Трудности в отношениях</li>
+                        <li>Чувство одиночества и изоляции</li>
+                        <li>Ревность, обиды, непрощение</li>
+                        <li>Заболевания сердца и легких</li>
+                        <li>Проблемы с дыханием</li>
+                    </ul>
+
+                    <h4>Признаки гармоничной работы</h4>
+                    <ul>
+                        <li>Способность любить и принимать любовь</li>
+                        <li>Сочувствие и сострадание к другим</li>
+                        <li>Гармоничные отношения</li>
+                        <li>Умение прощать себя и других</li>
+                        <li>Внутренний покой и радость</li>
+                    </ul>
+
+                    <div class="recommendations">
+                        <h4>10 рекомендаций для работы с Анахатой</h4>
+                        <ol>
+                            <li><strong>Практика раскрытия сердца</strong> - асаны йоги, раскрывающие грудную клетку
+                                (Уштрасана, Матсиасана).</li>
+                            <li><strong>Медитация любящей доброты</strong> (Метта-медитация) - отправление любви себе и
+                                другим.</li>
+                            <li><strong>Глубокое дыхание</strong> с фокусом на область сердца.</li>
+                            <li><strong>Пение мантры "ЯМ"</strong> в течение 5-10 минут.</li>
+                            <li><strong>Практика безусловного принятия</strong> - себя и других людей такими, какие они
+                                есть.</li>
+                            <li><strong>Ведение дневника благодарности</strong> - ежедневная запись того, за что вы
+                                благодарны.</li>
+                            <li><strong>Работа с зеленым и розовым цветом</strong> - в одежде, питании и окружении.</li>
+                            <li><strong>Использование кристаллов</strong> - розовый кварц, авантюрин, малахит.</li>
+                            <li><strong>Ароматерапия</strong> с использованием масел розы, жасмина, бергамота.</li>
+                            <li><strong>Практика прощения</strong> - написание писем (без отправки) с выражением
+                                прощения себе и другим.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вишуддха -->
+            <div class="chakra-card vishuddha" id="vishuddha-card">
+                <div class="chakra-card-header">
+                    <h3>Вишуддха (Горловая чакра)</h3>
+                    <p>Расположение: Область горла</p>
+                </div>
+                <div class="chakra-card-body">
+                    <h4>Описание</h4>
+                    <p>Вишуддха — пятая чакра, расположенная в области горла. Она отвечает за общение, самовыражение,
+                        честность и творческое выражение. Эта чакра связана со способностью слушать внутренний голос и
+                        выражать свою истину.</p>
+
+                    <h4>Основные свойства</h4>
+                    <ul>
+                        <li>Цвет: Голубой</li>
+                        <li>Элемент: Эфир</li>
+                        <li>Символ: Шестнадцатилепестковый лотос</li>
+                        <li>Мантра: "ХАМ"</li>
+                        <li>Нота: Соль</li>
+                    </ul>
+
+                    <h4>Физические проявления</h4>
+                    <p>Связана с горлом, щитовидной железой, шеей, челюстью, ушами и органами речи.</p>
+
+                    <h4>Признаки блокировки</h4>
+                    <ul>
+                        <li>Трудности с выражением мыслей и чувств</li>
+                        <li>Боязнь публичных выступлений</li>
+                        <li>Проблемы со щитовидной железой</li>
+                        <li>Боли в горле, шее</li>
+                        <li>Неспособность слушать других</li>
+                    </ul>
+
+                    <h4>Признаки гармоничной работы</h4>
+                    <ul>
+                        <li>Ясное и уверенное самовыражение</li>
+                        <li>Хорошие коммуникативные навыки</li>
+                        <li>Творческий потенциал</li>
+                        <li>Умение слушать и быть услышанным</li>
+                        <li>Способность жить в соответствии со своей правдой</li>
+                    </ul>
+
+                    <div class="recommendations">
+                        <h4>10 рекомендаций для работы с Вишуддхой</h4>
+                        <ol>
+                            <li><strong>Практика пения</strong> - мантры, песни или вокальные упражнения.</li>
+                            <li><strong>Йога для горла</strong> - Джаландхара Бандха, Сарвангасана (Стойка на плечах).
+                            </li>
+                            <li><strong>Работа с голосом</strong> - чтение вслух, декламация стихов.</li>
+                            <li><strong>Пение мантры "ХАМ"</strong> в течение 5-10 минут.</li>
+                            <li><strong>Практика осознанного общения</strong> - говорить честно и с добротой.</li>
+                            <li><strong>Ведение дневника</strong> - письменное выражение своих мыслей и чувств.</li>
+                            <li><strong>Работа с голубым цветом</strong> - в одежде, в окружении, в пище (голубика).
+                            </li>
+                            <li><strong>Использование кристаллов</strong> - аквамарин, голубой кальцит, лазурит.</li>
+                            <li><strong>Ароматерапия</strong> с использованием масел эвкалипта, мяты, шалфея.</li>
+                            <li><strong>Практика молчания</strong> - периодические часы или дни без разговоров для
+                                углубления внутреннего слушания.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Аджна -->
+            <div class="chakra-card ajna" id="ajna-card">
+                <div class="chakra-card-header">
+                    <h3>Аджна (Чакра третьего глаза)</h3>
+                    <p>Расположение: Между бровями</p>
+                </div>
+                <div class="chakra-card-body">
+                    <h4>Описание</h4>
+                    <p>Аджна — шестая чакра, расположенная в центре лба между бровями. Она отвечает за интуицию,
+                        ясновидение, мудрость и восприятие. Эта чакра связана с нашим "внутренним взором" и способностью
+                        видеть суть вещей.</p>
+
+                    <h4>Основные свойства</h4>
+                    <ul>
+                        <li>Цвет: Индиго</li>
+                        <li>Элемент: Свет</li>
+                        <li>Символ: Двухлепестковый лотос</li>
+                        <li>Мантра: "ОМ"</li>
+                        <li>Нота: Ля</li>
+                    </ul>
+
+                    <h4>Физические проявления</h4>
+                    <p>Связана с мозгом, гипофизом, глазами, лицевыми нервами и пазухами.</p>
+
+                    <h4>Признаки блокировки</h4>
+                    <ul>
+                        <li>Отсутствие интуиции</li>
+                        <li>Трудности с концентрацией</li>
+                        <li>Головные боли, проблемы со зрением</li>
+                        <li>Отрицание духовного аспекта жизни</li>
+                        <li>Неспособность видеть большую картину</li>
+                    </ul>
+
+                    <h4>Признаки гармоничной работы</h4>
+                    <ul>
+                        <li>Развитая интуиция</li>
+                        <li>Ясность мышления</li>
+                        <li>Хорошая концентрация и память</li>
+                        <li>Творческое воображение</li>
+                        <li>Способность к визуализации</li>
+                    </ul>
+
+                    <div class="recommendations">
+                        <h4>10 рекомендаций для работы с Аджной</h4>
+                        <ol>
+                            <li><strong>Медитация с фокусом на третий глаз</strong> - концентрация на точке между
+                                бровями.</li>
+                            <li><strong>Практика Тратака</strong> - сосредоточение взгляда на одной точке или пламени
+                                свечи.</li>
+                            <li><strong>Йога для активации третьего глаза</strong> - позы стоя на голове или с наклоном
+                                головы вперед.</li>
+                            <li><strong>Пение мантры "ОМ"</strong> в течение 5-10 минут.</li>
+                            <li><strong>Развитие интуиции</strong> - доверять внутренним ощущениям и первым
+                                впечатлениям.</li>
+                            <li><strong>Практика визуализации</strong> - создание ярких образов в уме.</li>
+                            <li><strong>Работа с индиго цветом</strong> - в одежде и окружении.</li>
+                            <li><strong>Использование кристаллов</strong> - лазурит, содалит, аметист.</li>
+                            <li><strong>Ароматерапия</strong> с использованием масел жасмина, базилика, лаванды.</li>
+                            <li><strong>Осознанные сновидения</strong> - ведение дневника снов и практика контроля
+                                сновидений.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Сахасрара -->
+            <div class="chakra-card sahasrara" id="sahasrara-card">
+                <div class="chakra-card-header">
+                    <h3>Сахасрара (Коронная чакра)</h3>
+                    <p>Расположение: Верхушка головы</p>
+                </div>
+                <div class="chakra-card-body">
+                    <h4>Описание</h4>
+                    <p>Сахасрара — седьмая чакра, расположенная на макушке головы. Она отвечает за духовное пробуждение,
+                        высшее сознание и связь с высшими силами. Эта чакра символизирует единство и полное осознание.
+                    </p>
+
+                    <h4>Основные свойства</h4>
+                    <ul>
+                        <li>Цвет: Фиолетовый или белый</li>
+                        <li>Элемент: Космическая энергия</li>
+                        <li>Символ: Тысячелепестковый лотос</li>
+                        <li>Мантра: "АУМ" или тишина</li>
+                        <li>Нота: Си</li>
+                    </ul>
+
+                    <h4>Физические проявления</h4>
+                    <p>Связана с головным мозгом, шишковидной железой и центральной нервной системой.</p>
+
+                    <h4>Признаки блокировки</h4>
+                    <ul>
+                        <li>Отсутствие духовных интересов</li>
+                        <li>Узость мышления</li>
+                        <li>Головные боли, особенно в верхней части головы</li>
+                        <li>Депрессия, апатия</li>
+                        <li>Отсутствие цели в жизни</li>
+                    </ul>
+
+                    <h4>Признаки гармоничной работы</h4>
+                    <ul>
+                        <li>Духовная осознанность</li>
+                        <li>Ощущение единства с миром</li>
+                        <li>Мудрость и понимание</li>
+                        <li>Внутренний покой</li>
+                        <li>Чувство высшего предназначения</li>
+                    </ul>
+
+                    <div class="recommendations">
+                        <h4>10 рекомендаций для работы с Сахасрарой</h4>
+                        <ol>
+                            <li><strong>Медитация тишины</strong> - сидение в полной тишине, отпуская мысли.</li>
+                            <li><strong>Йога для активации коронной чакры</strong> - Ширшасана (стойка на голове),
+                                Падмасана (поза лотоса).</li>
+                            <li><strong>Практика осознанности</strong> - пребывание в настоящем моменте.</li>
+                            <li><strong>Практика безмолвной медитации</strong> или повторение мантры "АУМ".</li>
+                            <li><strong>Изучение духовных текстов</strong> и философии.</li>
+                            <li><strong>Практика благодарности</strong> и признательности высшим силам.</li>
+                            <li><strong>Работа с фиолетовым и белым цветом</strong> в одежде и окружении.</li>
+                            <li><strong>Использование кристаллов</strong> - аметист, горный хрусталь, селенит.</li>
+                            <li><strong>Ароматерапия</strong> с использованием масел сандала, лотоса, ладана.</li>
+                            <li><strong>Практика самоотречения</strong> - отказ от эго и безусловное принятие всего
+                                сущего.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="practice-section">
+            <h2>Практики для работы с чакрами</h2>
+
+            <div class="tabs">
+                <div class="tab active" data-tab="meditation">Медитация</div>
+                <div class="tab" data-tab="yoga">Йога</div>
+                <div class="tab" data-tab="breathing">Дыхательные практики</div>
+                <div class="tab" data-tab="sound">Звуковые практики</div>
+                <div class="tab" data-tab="lifestyle">Стиль жизни</div>
+            </div>
+
+            <div class="tab-content active" id="meditation">
+                <h3>Медитация для сбалансирования чакр</h3>
+                <p>Медитация — один из самых эффективных способов работы с чакрами. Вот несколько медитативных техник:
+                </p>
+
+                <h4>1. Сканирование чакр</h4>
+                <p>Сядьте в удобную позу с прямой спиной. Начните с основания позвоночника и медленно перемещайте
+                    внимание вверх по каждой чакре, отмечая ощущения и представляя, как каждая чакра светится своим
+                    цветом:</p>
+                <ul>
+                    <li>Муладхара (основание позвоночника) - красный</li>
+                    <li>Свадхистана (нижняя часть живота) - оранжевый</li>
+                    <li>Манипура (солнечное сплетение) - желтый</li>
+                    <li>Анахата (сердце) - зеленый</li>
+                    <li>Вишуддха (горло) - голубой</li>
+                    <li>Аджна (третий глаз) - индиго</li>
+                    <li>Сахасрара (макушка головы) - фиолетовый или белый</li>
+                </ul>
+
+                <h4>2. Медитация на отдельную чакру</h4>
+                <p>Выберите чакру, которую хотите сбалансировать. Сконцентрируйтесь на соответствующей области тела,
+                    представляя чакру в виде вращающегося колеса энергии соответствующего цвета. Вдыхайте энергию в эту
+                    чакру и выдыхайте все блоки и напряжение.</p>
+
+                <h4>3. Медитация с визуализацией света</h4>
+                <p>Представьте, как луч света спускается с неба и входит через вашу коронную чакру. Наблюдайте, как свет
+                    проходит через каждую чакру, очищая и активируя их. Затем свет поднимается от корневой чакры обратно
+                    вверх, создавая круговой поток энергии.</p>
+
+                <div class="meditation-timer">
+                    <h4>Таймер для медитации</h4>
+                    <div class="duration-select">
+                        <label for="meditation-duration">Выберите продолжительность:</label>
+                        <select id="meditation-duration">
+                            <option value="5">5 минут</option>
+                            <option value="10">10 минут</option>
+                            <option value="15">15 минут</option>
+                            <option value="20">20 минут</option>
+                            <option value="30">30 минут</option>
+                        </select>
+                    </div>
+                    <div class="timer-display" id="timer-display">00:00</div>
+                    <div class="timer-controls">
+                        <button class="timer-btn start-btn" id="start-btn">Старт</button>
+                        <button class="timer-btn pause-btn" id="pause-btn">Пауза</button>
+                        <button class="timer-btn reset-btn" id="reset-btn">Сброс</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="yoga">
+                <h3>Йога для активации чакр</h3>
+                <p>Йога предлагает множество поз (асан), которые помогают активировать и балансировать чакры:</p>
+
+                <h4>1. Позы для Муладхары (корневой чакры)</h4>
+                <ul>
+                    <li><strong>Тадасана (Поза горы)</strong> - стоя с прямой спиной, стопы параллельно, руки вдоль
+                        тела.</li>
+                    <li><strong>Врикшасана (Поза дерева)</strong> - стоя на одной ноге, другая ступня прижата к
+                        внутренней стороне бедра.</li>
+                    <li><strong>Маласана (Поза гирлянды)</strong> - глубокое приседание, пятки на полу, руки в намасте
+                        перед грудью.</li>
+                </ul>
+
+                <h4>2. Позы для Свадхистаны (сакральной чакры)</h4>
+                <ul>
+                    <li><strong>Баддха Конасана (Поза связанного угла)</strong> - сидя, подошвы ног соединены, колени
+                        разведены в стороны.</li>
+                    <li><strong>Упавиштха Конасана (Поза сидящего угла)</strong> - сидя, ноги широко разведены в
+                        стороны.</li>
+                    <li><strong>Уттаната Шишосана (Поза счастливого ребенка)</strong> - лежа на спине, колени к груди,
+                        стопы в руках.</li>
+                </ul>
+
+                <h4>3. Позы для Манипуры (чакры солнечного сплетения)</h4>
+                <ul>
+                    <li><strong>Навасана (Поза лодки)</strong> - сидя с поднятыми ногами и туловищем, образуя форму
+                        буквы V.</li>
+                    <li><strong>Дханурасана (Поза лука)</strong> - лежа на животе, держась за щиколотки, прогиб спины.
+                    </li>
+                    <li><strong>Паривритта Триконасана (Поза перекрученного треугольника)</strong> - ноги широко,
+                        поворот туловища, рука тянется вверх.</li>
+                </ul>
+
+                <h4>4. Позы для Анахаты (сердечной чакры)</h4>
+                <ul>
+                    <li><strong>Уштрасана (Поза верблюда)</strong> - стоя на коленях, прогиб назад, руки на пятках.</li>
+                    <li><strong>Матсиасана (Поза рыбы)</strong> - лежа на спине, грудь поднята, макушка на полу.</li>
+                    <li><strong>Анахатасана (Поза тающего сердца)</strong> - на четвереньках, грудь опускается к полу,
+                        руки вытянуты вперед.</li>
+                </ul>
+
+                <h4>5. Позы для Вишуддхи (горловой чакры)</h4>
+                <ul>
+                    <li><strong>Сарвангасана (Стойка на плечах)</strong> - лежа на спине, ноги вертикально вверх,
+                        поддержка под спину.</li>
+                    <li><strong>Матсиасана (Поза рыбы)</strong> - лежа на спине, грудь и горло поднимаются.</li>
+                    <li><strong>Халасана (Поза плуга)</strong> - из стойки на плечах ноги опускаются за голову.</li>
+                </ul>
+
+                <h4>6. Позы для Аджны (чакры третьего глаза)</h4>
+                <ul>
+                    <li><strong>Адхо Мукха Шванасана (Поза собаки мордой вниз)</strong> - в форме перевернутой буквы V.
+                    </li>
+                    <li><strong>Балансирующие позы</strong> - Врикшасана (Дерево), Гарудасана (Орел).</li>
+                    <li><strong>Ширшасана (Стойка на голове)</strong> - перевернутая поза с опорой на голову и
+                        предплечья.</li>
+                </ul>
+
+                <h4>7. Позы для Сахасрары (коронной чакры)</h4>
+                <ul>
+                    <li><strong>Падмасана (Поза лотоса)</strong> - сидя скрестив ноги, каждая стопа на противоположном
+                        бедре.</li>
+                    <li><strong>Сарвангасана (Стойка на плечах)</strong> - вытягивает энергию от корневой к коронной
+                        чакре.</li>
+                    <li><strong>Шавасана (Поза трупа)</strong> - глубокое расслабление лежа на спине.</li>
+                </ul>
+
+                <p>Последовательность для балансировки всех чакр включает в себя плавный переход от одной позы к другой,
+                    начиная с поз для корневой чакры и заканчивая позами для коронной чакры.</p>
+            </div>
+
+            <div class="tab-content" id="breathing">
+                <h3>Дыхательные практики для активации чакр</h3>
+                <p>Пранаяма (контроль дыхания) — мощный инструмент для работы с чакрами. Вот несколько эффективных
+                    техник:</p>
+
+                <h4>1. Уджайи Пранаяма (Дыхание победителя)</h4>
+                <p>Техника, создающая легкое сужение горла и производящая характерный звук, похожий на шум океана.
+                    Активирует все чакры, особенно Вишуддху.</p>
+                <p><strong>Как выполнять:</strong></p>
+                <ol>
+                    <li>Сядьте прямо в удобной позе.</li>
+                    <li>Слегка сузьте заднюю часть горла, как будто вы хотите прошептать "хааа".</li>
+                    <li>Дышите медленно через нос, создавая мягкий звук в горле.</li>
+                    <li>Концентрируйтесь на звуке и ощущениях в горле.</li>
+                    <li>Практикуйте 5-10 минут.</li>
+                </ol>
+
+                <h4>2. Нади Шодхана (Альтернативное дыхание через ноздри)</h4>
+                <p>Балансирует правый и левый энергетические каналы и все чакры.</p>
+                <p><strong>Как выполнять:</strong></p>
+                <ol>
+                    <li>Сядьте прямо в удобной позе.</li>
+                    <li>Поднесите правую руку к носу, большим пальцем закрывайте правую ноздрю, безымянным и мизинцем —
+                        левую.</li>
+                    <li>Закройте правую ноздрю, вдохните через левую.</li>
+                    <li>Затем закройте левую ноздрю, выдохните через правую.</li>
+                    <li>Вдохните через правую ноздрю.</li>
+                    <li>Закройте правую ноздрю, выдохните через левую.</li>
+                    <li>Это один цикл. Повторите 5-10 циклов.</li>
+                </ol>
+
+                <h4>3. Капалабхати (Дыхание огненное очищение)</h4>
+                <p>Активирует Манипуру и стимулирует обмен веществ.</p>
+                <p><strong>Как выполнять:</strong></p>
+                <ol>
+                    <li>Сядьте прямо в удобной позе.</li>
+                    <li>Сделайте спокойный вдох через нос.</li>
+                    <li>Резко и сильно выдохните через нос, сокращая мышцы живота.</li>
+                    <li>Позвольте вдоху произойти пассивно, без усилий.</li>
+                    <li>Сосредоточьтесь на активных выдохах, выполняя их в быстром темпе.</li>
+                    <li>Начните с 20 повторений и постепенно увеличивайте до 100.</li>
+                </ol>
+
+                <h4>4. Бхрамари Пранаяма (Дыхание пчелы)</h4>
+                <p>Активирует Вишуддху и Аджну, успокаивает ум.</p>
+                <p><strong>Как выполнять:</strong></p>
+                <ol>
+                    <li>Сядьте прямо в удобной позе.</li>
+                    <li>Закройте глаза и расслабьте лицо.</li>
+                    <li>Поднесите указательные пальцы к ушам, готовясь закрыть их.</li>
+                    <li>Сделайте глубокий вдох через нос.</li>
+                    <li>Закройте уши указательными пальцами и, выдыхая через нос, издавайте протяжный звук "ммм", как
+                        жужжание пчелы.</li>
+                    <li>Повторите 5-10 раз.</li>
+                </ol>
+
+                <h4>5. Ситали Пранаяма (Охлаждающее дыхание)</h4>
+                <p>Балансирует Манипуру, охлаждает тело и успокаивает ум.</p>
+                <p><strong>Как выполнять:</strong></p>
+                <ol>
+                    <li>Сядьте прямо в удобной позе.</li>
+                    <li>Высуньте язык и сверните его в трубочку (если не получается, просто слегка приоткройте рот).
+                    </li>
+                    <li>Медленно вдохните через трубочку языка или рот.</li>
+                    <li>Втяните язык, закройте рот и медленно выдохните через нос.</li>
+                    <li>Повторите 5-10 раз.</li>
+                </ol>
+
+                <h4>6. Брахмари Мудра с Пранаямой</h4>
+                <p>Мощная техника для активации Аджны (третьего глаза).</p>
+                <p><strong>Как выполнять:</strong></p>
+                <ol>
+                    <li>Сядьте прямо в удобной позе.</li>
+                    <li>Закройте глаза большими пальцами, уши - указательными, ноздри - средними, верхнюю губу -
+                        безымянными, нижнюю - мизинцами.</li>
+                    <li>Слегка надавите на глаза и сосредоточьтесь на точке между бровями.</li>
+                    <li>Дышите глубоко и медленно в этом положении.</li>
+                    <li>Практикуйте 3-5 минут.</li>
+                </ol>
+            </div>
+
+            <div class="tab-content" id="sound">
+                <h3>Звуковые практики для балансировки чакр</h3>
+                <p>Звук — один из самых древних и эффективных способов воздействия на чакры. Вот несколько звуковых
+                    практик:</p>
+
+                <h4>1. Пение мантр для каждой чакры</h4>
+                <p>Каждая чакра имеет свою биджа-мантру (семенной звук):</p>
+                <ul>
+                    <li><strong>Муладхара</strong> - "ЛАМ" (произносится как "лам")</li>
+                    <li><strong>Свадхистана</strong> - "ВАМ" (произносится как "вам")</li>
+                    <li><strong>Манипура</strong> - "РАМ" (произносится как "рам")</li>
+                    <li><strong>Анахата</strong> - "ЯМ" (произносится как "ям")</li>
+                    <li><strong>Вишуддха</strong> - "ХАМ" (произносится как "хам")</li>
+                    <li><strong>Аджна</strong> - "ОМ" (произносится как "аум")</li>
+                    <li><strong>Сахасрара</strong> - Тишина или "АУМ"</li>
+                </ul>
+                <p>Для практики выберите мантру чакры, с которой хотите работать. Сядьте в удобную позу, закройте глаза
+                    и начните медленно и глубоко повторять мантру вслух в течение 5-10 минут, концентрируясь на
+                    соответствующей области тела.</p>
+
+                <h4>2. Тоны и ноты для чакр</h4>
+                <p>Каждая чакра резонирует с определенной музыкальной нотой:</p>
+                <ul>
+                    <li><strong>Муладхара</strong> - Нота До (C)</li>
+                    <li><strong>Свадхистана</strong> - Нота Ре (D)</li>
+                    <li><strong>Манипура</strong> - Нота Ми (E)</li>
+                    <li><strong>Анахата</strong> - Нота Фа (F)</li>
+                    <li><strong>Вишуддха</strong> - Нота Соль (G)</li>
+                    <li><strong>Аджна</strong> - Нота Ля (A)</li>
+                    <li><strong>Сахасрара</strong> - Нота Си (B)</li>
+                </ul>
+                <p>Слушание музыки, содержащей эти ноты, или использование камертонов и поющих чаш соответствующей
+                    частоты помогает активировать и сбалансировать чакры.</p>
+
+                <h4>3. Поющие чаши</h4>
+                <p>Тибетские поющие чаши создают вибрации, которые глубоко воздействуют на чакры и тело. Для практики:
+                </p>
+                <ol>
+                    <li>Выберите чашу, соответствующую чакре, с которой хотите работать.</li>
+                    <li>Сядьте в удобную позу и поставьте чашу перед собой или на тело рядом с чакрой.</li>
+                    <li>Ударьте по чаше палочкой и слушайте звук, пока он полностью не затихнет.</li>
+                    <li>Повторите несколько раз, концентрируясь на ощущениях в теле.</li>
+                </ol>
+
+                <h4>4. Тональное пение</h4>
+                <p>Эта техника использует ваш собственный голос для создания вибраций, которые воздействуют на чакры:
+                </p>
+                <ol>
+                    <li>Сядьте прямо в удобной позе.</li>
+                    <li>Сделайте глубокий вдох и на выдохе начните петь гласный звук.</li>
+                    <li>Для нижних чакр используйте низкие тона, для высших - более высокие.</li>
+                    <li>Муладхара - "У" (низкий тон)</li>
+                    <li>Свадхистана - "О" (низкий тон)</li>
+                    <li>Манипура - "О" (средний тон)</li>
+                    <li>Анахата - "А" (средний тон)</li>
+                    <li>Вишуддха - "Э" (высокий тон)</li>
+                    <li>Аджна - "И" (высокий тон)</li>
+                    <li>Сахасрара - "М" (с закрытым ртом) или тишина</li>
+                </ol>
+
+                <h4>5. Музыкальная терапия</h4>
+                <p>Регулярное слушание музыки, специально созданной для гармонизации чакр, может быть полезным
+                    дополнением к другим практикам. Такая музыка обычно содержит определенные частоты и тоны,
+                    соответствующие каждой чакре.</p>
+            </div>
+
+            <div class="tab-content" id="lifestyle">
+                <h3>Стиль жизни для поддержания баланса чакр</h3>
+                <p>Помимо специальных практик, существуют повседневные привычки и изменения в образе жизни, которые
+                    могут помочь поддерживать чакры в балансе:</p>
+
+                <h4>1. Питание и чакры</h4>
+                <p>Цвет продуктов часто соответствует чакрам, с которыми они резонируют:</p>
+                <ul>
+                    <li><strong>Муладхара (красный)</strong> - красные овощи и фрукты: свекла, красные яблоки, гранаты,
+                        клубника, красный перец. Также корнеплоды: картофель, морковь, пастернак.</li>
+                    <li><strong>Свадхистана (оранжевый)</strong> - оранжевые продукты: морковь, тыква, апельсины,
+                        мандарины, манго. Также продукты, богатые омега-3: орехи, семена, авокадо.</li>
+                    <li><strong>Манипура (желтый)</strong> - желтые продукты: кукуруза, желтый перец, бананы, ананасы,
+                        лимоны. Также цельные зерна и крупы: просо, киноа, коричневый рис.</li>
+                    <li><strong>Анахата (зеленый)</strong> - зеленые листовые овощи: шпинат, капуста, брокколи, зеленый
+                        горошек. Также зеленые фрукты: киви, зеленые яблоки, виноград.</li>
+                    <li><strong>Вишуддха (голубой)</strong> - голубика, черника, водоросли. Также травяные чаи и фрукты
+                        с высоким содержанием воды.</li>
+                    <li><strong>Аджна (индиго)</strong> - темно-синие и пурпурные продукты: ежевика, черника, баклажаны.
+                        Также продукты, богатые антиоксидантами.</li>
+                    <li><strong>Сахасрара (фиолетовый/белый)</strong> - фиолетовые продукты: виноград, сливы, баклажаны.
+                        Также очищенная вода и периодическое голодание для очищения.</li>
+                </ul>
+
+                <h4>2. Цветотерапия в повседневной жизни</h4>
+                <p>Использование цветов чакр в одежде, интерьере и окружении:</p>
+                <ul>
+                    <li>Носите одежду цвета чакры, которую хотите активировать.</li>
+                    <li>Окружите себя предметами соответствующего цвета.</li>
+                    <li>Используйте цветные лампы или свечи для медитации.</li>
+                    <li>Визуализируйте цвета чакр в повседневной жизни.</li>
+                </ul>
+
+                <h4>3. Работа с кристаллами</h4>
+                <p>Кристаллы и камни могут помочь в балансировке чакр:</p>
+                <ul>
+                    <li><strong>Муладхара</strong> - красный яшма, гематит, черный турмалин, гранат.</li>
+                    <li><strong>Свадхистана</strong> - сердолик, оранжевый кальцит, янтарь, лунный камень.</li>
+                    <li><strong>Манипура</strong> - цитрин, тигровый глаз, янтарь, желтый кальцит.</li>
+                    <li><strong>Анахата</strong> - розовый кварц, малахит, авантюрин, нефрит.</li>
+                    <li><strong>Вишуддха</strong> - голубой кальцит, аквамарин, бирюза, целестин.</li>
+                    <li><strong>Аджна</strong> - лазурит, содалит, аметист, флюорит.</li>
+                    <li><strong>Сахасрара</strong> - аметист, прозрачный кварц, белый агат, селенит.</li>
+                </ul>
+                <p>Носите эти камни в виде украшений, держите их в карманах или размещайте в местах, где проводите много
+                    времени.</p>
+
+                <h4>4. Ароматерапия для чакр</h4>
+                <p>Использование эфирных масел, соответствующих каждой чакре:</p>
+                <ul>
+                    <li><strong>Муладхара</strong> - кедр, пачули, ветивер, сандал.</li>
+                    <li><strong>Свадхистана</strong> - иланг-иланг, сандал, нероли, апельсин.</li>
+                    <li><strong>Манипура</strong> - лимон, розмарин, имбирь, бергамот.</li>
+                    <li><strong>Анахата</strong> - роза, герань, нероли, мелисса.</li>
+                    <li><strong>Вишуддха</strong> - эвкалипт, мята, шалфей, ромашка.</li>
+                    <li><strong>Аджна</strong> - жасмин, лаванда, базилик, тимьян.</li>
+                    <li><strong>Сахасрара</strong> - ладан, сандал, лотос, кедр.</li>
+                </ul>
+                <p>Используйте масла в аромалампах, добавляйте их в ванну или наносите на тело (разбавленные базовым
+                    маслом).</p>
+
+                <h4>5. Физическая активность</h4>
+                <p>Разные виды физической активности воздействуют на разные чакры:</p>
+                <ul>
+                    <li><strong>Муладхара</strong> - бег, ходьба, приседания, прыжки.</li>
+                    <li><strong>Свадхистана</strong> - танцы, плавание, упражнения на гибкость бедер.</li>
+                    <li><strong>Манипура</strong> - силовые тренировки, упражнения для кора, боевые искусства.</li>
+                    <li><strong>Анахата</strong> - йога сердца, дыхательные практики, растяжка грудной клетки.</li>
+                    <li><strong>Вишуддха</strong> - пение, вокальные упражнения, растяжка шеи.</li>
+                    <li><strong>Аджна</strong> - медитация, балансирующие асаны, упражнения на концентрацию.</li>
+                    <li><strong>Сахасрара</strong> - медитация в тишине, практика осознанности, шавасана.</li>
+                </ul>
+
+                <h4>6. Эмоциональная работа</h4>
+                <p>Каждая чакра связана с определенными эмоциями. Работа с эмоциями важна для поддержания баланса:</p>
+                <ul>
+                    <li><strong>Муладхара</strong> - работа со страхами, развитие чувства безопасности.</li>
+                    <li><strong>Свадхистана</strong> - принятие своих эмоций, развитие здоровой сексуальности.</li>
+                    <li><strong>Манипура</strong> - работа с гневом, развитие здоровой самооценки.</li>
+                    <li><strong>Анахата</strong> - работа с обидами, практика прощения и безусловной любви.</li>
+                    <li><strong>Вишуддха</strong> - честное выражение мыслей и чувств, избегание лжи.</li>
+                    <li><strong>Аджна</strong> - работа с иллюзиями и самообманом, развитие интуиции.</li>
+                    <li><strong>Сахасрара</strong> - принятие всех аспектов жизни, развитие духовной осознанности.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <div class="back-to-top" id="backToTop">↑</div>
+
+    <footer>
+        <p>© 2025 Гармония чакр - Путеводитель по энергетическим центрам</p>
+        <p>Разработано с любовью для гармоничного развития</p>
+    </footer>
+
+    <script>
+        // Переключение между темами
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            themeToggle.textContent = body.classList.contains('dark-mode') ? 'Светлая тема' : 'Тёмная тема';
+        });
+
+        // Показать/скрыть информацию о чакрах
+        const chakraPoints = document.querySelectorAll('.chakra-point');
+        const chakraCards = document.getElementById('chakraCards');
+        const chakraInfo = document.getElementById('chakraInfo');
+
+        chakraPoints.forEach(point => {
+            // point.addEventListener('click', () => {
+            //     const chakraName = point.getAttribute('data-chakra');
+            //     const allCards = document.querySelectorAll('.chakra-card');
+
+            //     allCards.forEach(card => {
+            //         card.classList.remove('active');
+            //     });
+
+            //     const selectedCard = document.getElementById(`${chakraName}-card`);
+            //     if (selectedCard) {
+            //         selectedCard.classList.add('active');
+            //         chakraInfo.style.display = 'none';
+            //         chakraCards.style.display = 'grid';
+
+            //         // Прокрутка к карточке
+            //         selectedCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            //     }
+            // });
+        });
+
+        // Переключение вкладок в разделе практик
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-tab');
+
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                tab.classList.add('active');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+
+        // Кнопка "Вернуться наверх"
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Таймер для медитации
+        const timerDisplay = document.getElementById('timer-display');
+        const startBtn = document.getElementById('start-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const durationSelect = document.getElementById('meditation-duration');
+
+        let countdown;
+        let timeLeft = 0;
+        let isRunning = false;
+
+        function updateTimerDisplay(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        function startTimer() {
+            if (!isRunning) {
+                if (timeLeft === 0) {
+                    timeLeft = parseInt(durationSelect.value) * 60;
+                }
+
+                isRunning = true;
+
+                countdown = setInterval(() => {
+                    timeLeft--;
+                    updateTimerDisplay(timeLeft);
+
+                    if (timeLeft <= 0) {
+                        clearInterval(countdown);
+                        isRunning = false;
+                        alert('Медитация завершена!');
+                        resetTimer();
+                    }
+                }, 1000);
+            }
+        }
+
+        // Создаем оверлей для модального окна, если его еще нет
+        function setupModalOverlay() {
+            // Проверяем, существует ли уже оверлей
+            let overlay = document.querySelector('.chakra-modal-overlay');
+
+            if (!overlay) {
+                // Создаем оверлей, если его нет
+                overlay = document.createElement('div');
+                overlay.className = 'chakra-modal-overlay';
+                document.body.appendChild(overlay);
+
+                // Добавляем обработчик клика для закрытия при клике на оверлей
+                overlay.addEventListener('click', function (e) {
+                    // Закрываем модальное окно только если клик был на оверлее, а не на карточке
+                    if (e.target === overlay) {
+                        closeChakraModal();
+                    }
+                });
+            }
+
+            return overlay;
+        }
+
+        // Добавляем кнопки закрытия к карточкам чакр
+        function addCloseButtons() {
+            const chakraCards = document.querySelectorAll('.chakra-card');
+
+            chakraCards.forEach(card => {
+                // Проверяем, есть ли уже кнопка закрытия
+                if (!card.querySelector('.chakra-close-btn')) {
+                    const closeBtn = document.createElement('button');
+                    closeBtn.className = 'chakra-close-btn';
+                    closeBtn.innerHTML = '&times;';
+                    closeBtn.setAttribute('aria-label', 'Закрыть');
+                    closeBtn.addEventListener('click', closeChakraModal);
+
+                    // Добавляем кнопку в заголовок карточки
+                    const header = card.querySelector('.chakra-card-header');
+                    if (header) {
+                        header.appendChild(closeBtn);
+                    }
+                }
+            });
+        }
+
+        // Открытие модального окна для конкретной чакры
+        function openChakraModal(chakraId) {
+            // Подготавливаем оверлей
+            const overlay = setupModalOverlay();
+
+            // Находим карточку чакры по ID
+            const chakraCard = document.getElementById(chakraId + '-card');
+
+            if (chakraCard) {
+                // Перемещаем карточку внутрь оверлея
+                overlay.innerHTML = '';
+                overlay.appendChild(chakraCard.cloneNode(true));
+
+                // Активируем оверлей и карточку
+                overlay.classList.add('active');
+                overlay.querySelector('.chakra-card').classList.add('active');
+
+                // Добавляем кнопку закрытия
+                const closeBtn = document.createElement('button');
+                closeBtn.className = 'chakra-close-btn';
+                closeBtn.innerHTML = '&times;';
+                closeBtn.setAttribute('aria-label', 'Закрыть');
+                closeBtn.addEventListener('click', closeChakraModal);
+
+                const header = overlay.querySelector('.chakra-card-header');
+                if (header) {
+                    header.appendChild(closeBtn);
+                }
+
+                // Блокируем прокрутку страницы
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Закрытие модального окна
+        function closeChakraModal() {
+            const overlay = document.querySelector('.chakra-modal-overlay');
+
+            if (overlay) {
+                // Деактивируем оверлей
+                overlay.classList.remove('active');
+
+                // Через небольшую задержку очищаем содержимое оверлея
+                setTimeout(() => {
+                    overlay.innerHTML = '';
+                    // Возвращаем прокрутку страницы
+                    document.body.style.overflow = '';
+                }, 300); // Совпадает с длительностью анимации затухания
+            }
+        }
+
+        // Инициализация всех точек чакр
+        function initChakraPoints() {
+            const chakraPoints = document.querySelectorAll('.chakra-point');
+
+            chakraPoints.forEach(point => {
+                // Получаем ID чакры из атрибута data-chakra
+                const chakraId = point.getAttribute('data-chakra');
+
+                // Добавляем обработчик клика
+                point.addEventListener('click', function () {
+                    openChakraModal(chakraId);
+                });
+            });
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function () {
+            // Инициализируем точки чакр
+            initChakraPoints();
+
+            // Добавляем кнопки закрытия к карточкам
+            addCloseButtons();
+        });
+
+        function pauseTimer() {
+            clearInterval(countdown);
+            isRunning = false;
+        }
+
+        function resetTimer() {
+            clearInterval(countdown);
+            isRunning = false;
+            timeLeft = 0;
+            updateTimerDisplay(timeLeft);
+        }
+
+        startBtn.addEventListener('click', startTimer);
+        pauseBtn.addEventListener('click', pauseTimer);
+        resetBtn.addEventListener('click', resetTimer);
+
+        durationSelect.addEventListener('change', () => {
+            resetTimer();
+            timeLeft = parseInt(durationSelect.value) * 60;
+            updateTimerDisplay(timeLeft);
+        });
+
+        // Инициализация
+        updateTimerDisplay(0);
+    </script>
+</body>
+
+</html>
