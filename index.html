@@ -805,7 +805,7 @@
                 <!-- Torso -->
                 <path d="M170,160 C150,200 150,260 170,300 L230,300 C250,260 250,200 230,160 Z" fill="black" />
 
-                
+
 
                 <!-- Legs in lotus position -->
                 <path d="M170,300 C150,320 100,320 70,350 C120,360 170,330 200,330" stroke="black" stroke-width="15"
@@ -1703,26 +1703,6 @@
         const chakraCards = document.getElementById('chakraCards');
         const chakraInfo = document.getElementById('chakraInfo');
 
-        chakraPoints.forEach(point => {
-            // point.addEventListener('click', () => {
-            //     const chakraName = point.getAttribute('data-chakra');
-            //     const allCards = document.querySelectorAll('.chakra-card');
-
-            //     allCards.forEach(card => {
-            //         card.classList.remove('active');
-            //     });
-
-            //     const selectedCard = document.getElementById(`${chakraName}-card`);
-            //     if (selectedCard) {
-            //         selectedCard.classList.add('active');
-            //         chakraInfo.style.display = 'none';
-            //         chakraCards.style.display = 'grid';
-
-            //         // Прокрутка к карточке
-            //         selectedCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            //     }
-            // });
-        });
 
         // Переключение вкладок в разделе практик
         const tabs = document.querySelectorAll('.tab');
@@ -1796,6 +1776,19 @@
                 }, 1000);
             }
         }
+
+
+        document.addEventListener('keydown', function (event) {
+            // Check if the pressed key is Escape (key code 27)
+            if (event.key === 'Escape' || event.keyCode === 27) {
+                closeChakraModal();
+                // You can add your custom actions here
+                // For example:
+                // closeModal();
+                // cancelOperation();
+                // etc.
+            }
+        });
 
         // Создаем оверлей для модального окна, если его еще нет
         function setupModalOverlay() {
