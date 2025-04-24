@@ -7,13 +7,13 @@
     <title>Гармония чакр - Путеводитель по энергетическим центрам</title>
     <style>
         :root {
-            --muladhara-color: #FF5252;
-            --svadhisthana-color: #FF9100;
-            --manipura-color: #FFEB3B;
-            --anahata-color: #4CAF50;
-            --vishuddha-color: #2196F3;
-            --ajna-color: #324da6;
-            --sahasrara-color: #9d0d8a;
+            --muladhara-color: #FF0000;
+            --svadhisthana-color: #FF7F00;
+            --manipura-color: #FFFF00;
+            --anahata-color: #00FF00;
+            --vishuddha-color: #00FFFF;
+            --ajna-color: #0000FF;
+            --sahasrara-color: #8B00FF;
             --primary-text: #333;
             --secondary-text: #666;
             --light-text: #fff;
@@ -678,7 +678,16 @@
         }
 
         .chakra-label::before {
-            content: "<----- ";
+            content: "";
+            display: inline-block;
+            width: 30px;
+            height: 16px;
+            margin-right: 5px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 24' width='50' height='24'%3E%3Cpath fill='currentColor' d='M45 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H45v-2z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            vertical-align: middle;
 
         }
 
@@ -797,37 +806,36 @@
         <div class="human-figure-container">
             <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
                 <!-- Head -->
-                <circle cx="200" cy="100" r="40" fill="black" />
+                <circle cx="200" cy="100" r="40" fill="#D5A57C" />
 
                 <!-- Neck -->
-                <rect x="190" y="140" width="20" height="20" fill="black" />
+                <rect x="190" y="140" width="20" height="20" fill="#D5A57C" />
 
                 <!-- Torso -->
-                <path d="M170,160 C150,200 150,260 170,300 L230,300 C250,260 250,200 230,160 Z" fill="black" />
+                <path d="M170,160 C150,200 150,260 170,300 L230,300 C250,260 250,200 230,160 Z" fill="#D5A57C" />
 
 
 
                 <!-- Legs in lotus position -->
-                <path d="M170,300 C150,320 100,320 70,350 C120,360 170,330 200,330" stroke="black" stroke-width="15"
+                <path d="M170,300 C150,320 100,320 70,350 C120,360 170,330 200,330" stroke="#D5A57C" stroke-width="15"
                     fill="none" />
-                <path d="M230,300 C250,320 300,320 330,350 C280,360 230,330 200,330" stroke="black" stroke-width="15"
+                <path d="M230,300 C250,320 300,320 330,350 C280,360 230,330 200,330" stroke="#D5A57C" stroke-width="15"
                     fill="none" />
 
                 <!-- Feet -->
-                <ellipse cx="70" cy="350" rx="15" ry="10" fill="black" />
-                <ellipse cx="330" cy="350" rx="15" ry="10" fill="black" />
+                <ellipse cx="70" cy="350" rx="15" ry="10" fill="#D5A57C" />
+                <ellipse cx="330" cy="350" rx="15" ry="10" fill="#D5A57C" />
 
                 <!-- Arms - modified to rest on knees -->
-                <path d="M170,180 C160,220 120,280 90,330" stroke="black" stroke-width="15" fill="none" />
-                <path d="M230,180 C240,220 280,280 310,330" stroke="black" stroke-width="15" fill="none" />
+                <path d="M170,180 C160,220 120,280 90,330" stroke="#D5A57C" stroke-width="15" fill="none" />
+                <path d="M230,180 C240,220 280,280 310,330" stroke="#D5A57C" stroke-width="15" fill="none" />
 
                 <!-- Hands on knees -->
-                <ellipse cx="90" cy="330" rx="10" ry="8" fill="black" />
-                <ellipse cx="310" cy="330" rx="10" ry="8" fill="black" />
+                <ellipse cx="90" cy="330" rx="10" ry="8" fill="#D5A57C" />
+                <ellipse cx="310" cy="330" rx="10" ry="8" fill="#D5A57C" />
             </svg>
 
             <div class="chakra-points">
-                <!-- Chakra points with labels -->
                 <div class="chakra-point muladhara" data-chakra="muladhara"></div>
                 <div class="chakra-label muladhara-label">Муладхара - Корневая чакра</div>
 
